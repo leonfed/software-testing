@@ -40,3 +40,16 @@
 .InputLabel {
     margin: 0 5px;
 }
+
+.ErrorBox {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 25px;
+    background-color: rgba(219,0,9,0.29);
+}
+
+.ErrorText {
+    margin: auto;
+    color: #aa121d;
+}

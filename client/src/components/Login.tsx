@@ -12,9 +12,20 @@ const Login = (props: any) => {
         searchParams.append("login", login);
         searchParams.append("password", password);
 
-        const response = await fetch('http://localhost:8080/login?' + searchParams);
         const userInfo: UserInfo = {login: login, password: password};
-        props.loginFunction(userInfo)
+
+        try {
+            let response = await fetch('http://localhost:8080/login?' + searchParams);
+            if (response.ok) {
+                props.loginFunction(userInfo)
+            } else if (response.status === 401) {
+                props.errorFunction("Incorrect login or password")
+            } else {
+                props.errorFunction("Server error. Please retry")
+            }
+        } catch (exception) {
+            props.errorFunction("Request server error. Please retry")
+        }
     };
 
     return (

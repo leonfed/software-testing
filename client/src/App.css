@@ -1,3 +1,42 @@
 .App {
-  text-align: center;
+    text-align: center;
+}
+
+.NavigationHeader {
+    margin: 0;
+    height: 60px;
+    background-color: #FFFF66;
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-content: center;
+}
+
+.NavigationLink {
+    margin: auto 25px;
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    background-color: #CCCCCC;
+    border-radius: 15px;
+}
+
+.NavigationLink:hover {
+    background-color: #EEEEEE;
+}
+
+.InputForm {
+    margin: 30px auto;
+    padding: 10px;
+    background-color: #DDDDDD;
+    border: thick double black;
+    width: 30%;
+}
+
+.InputField {
+    margin: 20px;
+}
+
+.InputLabel {
+    margin: 0 5px;
 }

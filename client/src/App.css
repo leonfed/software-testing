@@ -25,7 +25,8 @@
     background-color: #EEEEEE;
 }
 
-.InputForm {
+.InputForm,
+.ClickerBox {
     margin: 30px auto;
     padding: 10px;
     background-color: #DDDDDD;
@@ -41,15 +42,40 @@
     margin: 0 5px;
 }
 
-.ErrorBox {
+.ErrorBox,
+.OkBox {
     display: flex;
     justify-content: center;
     align-content: center;
     height: 25px;
-    background-color: rgba(219,0,9,0.29);
+}
+
+.ErrorText,
+.OkText {
+    margin: auto;
+}
+
+.ErrorBox {
+    background-color: rgba(233, 0, 9, 0.22);
 }
 
 .ErrorText {
-    margin: auto;
     color: #aa121d;
+}
+
+.OkBox {
+    background-color: rgba(0, 219, 58, 0.22);
+}
+
+.OkText {
+    color: #006b12;
+}
+
+.ClickerText {
+    margin: 10px auto;
+    font-size: 1.5rem;
+}
+
+.ClickerButton {
+    margin: 10px auto;
 }

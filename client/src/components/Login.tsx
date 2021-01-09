@@ -8,7 +8,7 @@ const Login = (props: any) => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        var searchParams = new URLSearchParams();
+        const searchParams = new URLSearchParams();
         searchParams.append("login", login);
         searchParams.append("password", password);
 

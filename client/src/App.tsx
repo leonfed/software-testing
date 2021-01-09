@@ -9,15 +9,28 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Logout from "./components/Logout";
 import Signup from './components/Signup';
+import Clicker from './components/Clicker';
 import {UserInfo} from "./model/UserInfo";
 import {useState} from "react";
+
+interface Clicks {
+    clicks?: number
+}
 
 function App() {
     const [cookies, setCookie] = useCookies(["login", "password"]);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const clearErrorMessage = () => {
-        setErrorMessage('')
+    const initialClicks: Clicks = {};
+    const [clicks, setClicks] = useState(initialClicks);
+
+    const clearErrorMessage = () => setErrorMessage('');
+
+    console.log(clicks.clicks);
+
+    const clearUser = () => {
+        setCookie("login", "", {path: "/"});
+        setCookie("password", "", {path: "/"});
     };
 
     const loginFunction = (userInfo: UserInfo) => {
@@ -28,8 +41,17 @@ function App() {
 
     const logoutFunction = () => {
         clearErrorMessage();
-        setCookie("login", "", {path: "/"});
-        setCookie("password", "", {path: "/"});
+        clearUser();
+    };
+
+    const forceLogoutFunction = () => {
+        setErrorMessage("Problems with authorization. Please retry to login");
+        clearUser();
+    };
+
+    const updateClicks = (clicks: number) => {
+        clearErrorMessage();
+        setClicks({clicks: clicks});
     };
 
     const isLoggedIn = () => cookies.login && cookies.password;
@@ -44,7 +66,7 @@ function App() {
                     <Route path="/home" id="home" component={Home} exact/>
                     <Route path="/signup" id="signup" component={() =>
                         !isLoggedIn()
-                            ? Signup()
+                            ? <Signup loginFunction={loginFunction} errorFunction={setErrorMessage}/>
                             : Home()}/>
                     <Route path="/login" id="login" component={() =>
                         !isLoggedIn()
@@ -56,7 +78,12 @@ function App() {
                             : Home()}/>
                     <Route path="/clicker" id="clicker" component={() =>
                         isLoggedIn()
-                            ? <div>Clicker</div>
+                            ? <Clicker forceLogoutFunction={forceLogoutFunction}
+                                       errorFunction={setErrorMessage}
+                                       updateClicks={updateClicks}
+                                       login={cookies.login}
+                                       password={cookies.password}
+                                       currentClicks={clicks.clicks}/>
                             : Home()}/>
                     <Route component={ErrorPage}/>
                 </Switch>

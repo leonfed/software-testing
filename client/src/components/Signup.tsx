@@ -1,12 +1,35 @@
 import React, {FormEvent, useState} from 'react';
+import {UserInfo} from "../model/UserInfo";
 
-const Signup = () => {
+const Signup = (props: any) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        const searchParams = new URLSearchParams();
+        searchParams.append("login", login);
+        searchParams.append("password", password);
+        searchParams.append("email", email);
+
+        const userInfo: UserInfo = {login: login, password: password};
+
+        try {
+            let response = await fetch('http://localhost:8080/signup?' + searchParams);
+            if (response.ok) {
+                props.loginFunction(userInfo)
+            } else if (response.status === 403) {
+                props.errorFunction("This login already exists. Please enter another login")
+            } else if (response.status === 406) {
+                props.errorFunction("Not acceptable input")
+            } else {
+                props.errorFunction("Server error. Please retry")
+            }
+        } catch (exception) {
+            props.errorFunction("Request server error. Please retry")
+        }
     };
     return (
         <form onSubmit={handleSubmit} className="InputForm">

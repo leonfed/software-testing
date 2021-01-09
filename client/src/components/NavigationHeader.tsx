@@ -13,12 +13,17 @@ const logoutNavLinks = () => {
     return <NavLink className="NavigationLink" to="/logout">Log Out</NavLink>;
 };
 
+const clickerNavLinks = () => {
+    return <NavLink className="NavigationLink" to="/clicker">Clicker</NavLink>;
+};
+
 const NavigationHeader = (props: any) => {
     return (
         <div className="NavigationHeader">
             <NavLink className="NavigationLink" to="/">Home</NavLink>
             {!props.isLoggedIn() && loginNavLinks()}
             {!props.isLoggedIn() && signupNavLinks()}
+            {props.isLoggedIn() && clickerNavLinks()}
             {props.isLoggedIn() && logoutNavLinks()}
         </div>
     );

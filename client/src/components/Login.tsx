@@ -1,6 +1,19 @@
 import React, {FormEvent, useState} from 'react';
 import {UserInfo} from "../model/UserInfo";
 
+export enum LoginResponseErrors {
+    IncorrectData = "Incorrect login or password.",
+    Request = "Request server error. Please retry.",
+}
+
+export const getLoginResponseError = (status: number) => {
+    if (status === 401) {
+        return LoginResponseErrors.IncorrectData;
+    } else {
+        return LoginResponseErrors.Request;
+    }
+};
+
 const Login = (props: any) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
@@ -18,13 +31,12 @@ const Login = (props: any) => {
             let response = await fetch('http://localhost:8080/login?' + searchParams);
             if (response.ok) {
                 props.loginFunction(userInfo)
-            } else if (response.status === 401) {
-                props.errorFunction("Incorrect login or password")
             } else {
-                props.errorFunction("Server error. Please retry")
+                const error = getLoginResponseError(response.status);
+                props.errorFunction(error)
             }
         } catch (exception) {
-            props.errorFunction("Request server error. Please retry")
+            props.errorFunction(LoginResponseErrors.Request)
         }
     };
 

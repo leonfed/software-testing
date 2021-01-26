@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 class UserService {
-    users = [{login: "sample_login", password: "sample_password", email: "sample_email@example.com", clicks: 0}];
+    users = [{login: "sample_login", password: "Passw0rd", email: "sample_email@example.com", clicks: 0}];
 
     addUser(login, password, email) {
         this.users.push({login: login, password: password, email: email, clicks: 0});

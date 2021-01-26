@@ -1,7 +1,20 @@
 import React, {FormEvent, useState} from 'react';
 import {UserInfo} from "../model/UserInfo";
 
-const Login = (props: any) => {
+export enum ClickResponseErrors {
+    Authorization = "Problems with authorization. Please, retry or logout and login again.",
+    Request = "Request server error. Please retry.",
+}
+
+export const getClickResponseError = (status: number) => {
+    if (status === 401) {
+        return ClickResponseErrors.Authorization;
+    } else {
+        return ClickResponseErrors.Request;
+    }
+};
+
+export const Clicker = (props: any) => {
     const getClicks = async (increment: boolean) => {
         const searchParams = new URLSearchParams();
         searchParams.append("login", props.login);
@@ -15,11 +28,12 @@ const Login = (props: any) => {
             if (response.ok) {
                 const responseJson = await response.json();
                 props.updateClicks(responseJson.clicks);
-            } else if (response.status === 401) {
-                props.forceLogoutFunction()
+            } else {
+                const error = getClickResponseError(response.status);
+                props.errorFunction(error)
             }
         } catch (exception) {
-            props.errorFunction("Request server error. Please retry")
+            props.errorFunction(ClickResponseErrors.Request)
         }
     };
 
@@ -39,5 +53,3 @@ const Login = (props: any) => {
         </div>
     );
 };
-
-export default Login;

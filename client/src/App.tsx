@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Logout from "./components/Logout";
 import Signup from './components/Signup';
-import Clicker from './components/Clicker';
+import {Clicker} from './components/Clicker';
 import {UserInfo} from "./model/UserInfo";
 import {useState} from "react";
 
@@ -44,11 +44,6 @@ function App() {
         clearUser();
     };
 
-    const forceLogoutFunction = () => {
-        setErrorMessage("Problems with authorization. Please retry to login");
-        clearUser();
-    };
-
     const updateClicks = (clicks: number) => {
         clearErrorMessage();
         setClicks({clicks: clicks});
@@ -78,8 +73,7 @@ function App() {
                             : Home()}/>
                     <Route path="/clicker" id="clicker" component={() =>
                         isLoggedIn()
-                            ? <Clicker forceLogoutFunction={forceLogoutFunction}
-                                       errorFunction={setErrorMessage}
+                            ? <Clicker errorFunction={setErrorMessage}
                                        updateClicks={updateClicks}
                                        login={cookies.login}
                                        password={cookies.password}

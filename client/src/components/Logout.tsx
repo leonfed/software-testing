@@ -1,5 +1,7 @@
 import React from 'react';
 
+export const LOGOUT_MESSAGE = 'This is a home page for simple app.';
+
 const Logout = (props: any) => {
     const logout = () => {
         props.logoutFunction();
@@ -7,7 +9,7 @@ const Logout = (props: any) => {
 
     return (
         <div>
-            <p>Do you really want to log out?</p>
+            <p>{LOGOUT_MESSAGE}</p>
             <button onClick={logout}>Log out</button>
         </div>
     );

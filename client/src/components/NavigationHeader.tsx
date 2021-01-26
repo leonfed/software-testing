@@ -6,7 +6,7 @@ const loginNavLinks = () => {
 };
 
 const signupNavLinks = () => {
-    return <NavLink className="NavigationLink" to="/signup">Sing Up</NavLink>;
+    return <NavLink className="NavigationLink" to="/signup">Sign Up</NavLink>;
 };
 
 const logoutNavLinks = () => {

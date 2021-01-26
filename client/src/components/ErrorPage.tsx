@@ -1,11 +1,11 @@
 import React from 'react';
 
-const ErrorPage = () => {
+export const ERROR_PAGE_MESSAGE = 'Page Not Found';
+
+export const ErrorPage = () => {
     return (
         <div>
-            <p>Page Not Found</p>
+            <p>{ERROR_PAGE_MESSAGE}</p>
         </div>
     );
 };
-
-export default ErrorPage;

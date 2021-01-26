@@ -3,9 +3,9 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {useCookies} from "react-cookie";
 
 import NavigationHeader from './components/NavigationHeader';
-import ErrorPage from './components/ErrorPage';
+import {ErrorPage} from './components/ErrorPage';
 import ErrorMessage from './components/ErrorMessage';
-import Home from './components/Home';
+import {Home} from './components/Home';
 import Login from './components/Login';
 import Logout from "./components/Logout";
 import Signup from './components/Signup';
@@ -42,6 +42,7 @@ function App() {
     const logoutFunction = () => {
         clearErrorMessage();
         clearUser();
+        setClicks(initialClicks);
     };
 
     const updateClicks = (clicks: number) => {

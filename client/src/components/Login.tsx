@@ -50,7 +50,7 @@ const Login = (props: any) => {
                 <label htmlFor='password' className="InputLabel">Password</label>
                 <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="InputButton">Log in</button>
+            <button type="submit" className="InputButton">Log In</button>
         </form>
     );
 };

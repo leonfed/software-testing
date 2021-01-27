@@ -10,6 +10,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
+    "cypress": "^6.3.0",
     "express": "^4.17.1",
     "react": "^17.0.1",
     "react-cookie": "^4.0.3",
@@ -22,9 +23,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "npm run test-jest && npm run test-playwright",
-    "test-jest":  "jest -- /test/jest_unit.test /test/jest_component.test",
+    "test": "npm run test-jest && npm run test-playwright && npm run test-cypress",
+    "test-jest": "jest -- /test/jest_unit.test /test/jest_component.test",
     "test-playwright": "jest -- /test/playwright_e2e.test",
+    "test-cypress": "cypress run",
+    "cypress": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

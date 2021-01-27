@@ -4,14 +4,11 @@ import {HOME_MESSAGE} from "../src/components/Home";
 import {ERROR_PAGE_MESSAGE} from "../src/components/ErrorPage";
 import {LoginResponseErrors} from "../src/components/Login";
 import {INCORRECT_LOGIN_ERROR, INCORRECT_PASSWORD_ERROR} from "../src/components/Signup";
+import {randomString} from "../src/utils/Random";
 
 const playwright = require('playwright');
 
 const HOME_URL = 'http://localhost:3000';
-
-function randomString() {
-    return Math.random().toString(36).substring(7);
-}
 
 async function sleep(ms: number) {
     await new Promise((resolve) => setTimeout(resolve, ms));
@@ -86,8 +83,9 @@ describe(`playwright e2e with authorization`, () => {
     let browser: any = null;
     let page: any = null;
 
-    let login: string | undefined = undefined;
+    let login = randomString();
     const password = 'Passw0rd';
+    const email = randomString() + '@' + randomString() + '.com';
 
     async function doLogin() {
         await page.goto(HOME_URL + '/login');
@@ -106,9 +104,6 @@ describe(`playwright e2e with authorization`, () => {
     beforeAll(async () => {
         browser = await playwright['firefox'].launch();
         page = await browser.newPage();
-
-        login = randomString();
-        const email = randomString() + '@' + randomString() + '.com';
 
         await page.goto(HOME_URL + '/signup');
         await page.fill('#signup_form__login', login);
@@ -138,8 +133,8 @@ describe(`playwright e2e with authorization`, () => {
     it(`click to increase count`, async () => {
         const clicks = Number(await getClicks());
         await page.click('#clicker__button');
-        const clicks_new = Number(await getClicks());
-        expect(clicks_new - 1).toBe(clicks)
+        const newClicks = Number(await getClicks());
+        expect(newClicks - 1).toBe(clicks)
     });
 
     it(`logout and login`, async () => {
@@ -148,7 +143,7 @@ describe(`playwright e2e with authorization`, () => {
         await doLogout();
         await doLogin();
 
-        const clicks_new = Number(await getClicks());
-        expect(clicks_new).toBe(clicks)
+        const newClicks = Number(await getClicks());
+        expect(newClicks).toBe(clicks)
     });
 });

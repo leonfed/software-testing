@@ -2,6 +2,7 @@ import {HOME_MESSAGE} from "../../src/components/Home";
 import {ERROR_PAGE_MESSAGE} from "../../src/components/ErrorPage";
 import {LoginResponseErrors} from "../../src/components/Login";
 import {INCORRECT_LOGIN_ERROR, INCORRECT_PASSWORD_ERROR} from "../../src/components/Signup";
+import {randomString} from "../../src/utils/Random";
 
 const HOME_URL = 'http://localhost:3000';
 
@@ -48,5 +49,62 @@ describe('cypress e2e without authorization', () => {
         cy.get('#signup_form').should('be.visible');
         cy.get('#error__message').should('contain', INCORRECT_PASSWORD_ERROR);
     });
+});
 
+
+describe('cypress e2e with authorization', () => {
+
+    let login = randomString();
+    const password = 'Passw0rd';
+    const email = randomString() + '@' + randomString() + '.com';
+
+    before(() => {
+        cy.visit(HOME_URL + '/signup');
+        cy.get('#signup_form__login').type(login);
+        cy.get('#signup_form__password').type(password);
+        cy.get('#signup_form__email').type(email);
+        cy.get('#signup_form__submit').click();
+        cy.wait(200);
+    });
+
+    function doLogin() {
+        cy.visit(HOME_URL + '/login');
+        cy.get('#login_form__login').type(login);
+        cy.get('#login_form__password').type(password);
+        cy.get('#login_form__submit').click();
+        cy.wait(200);
+    }
+
+    function doLogout() {
+        cy.visit(HOME_URL + '/logout');
+        cy.get('#logout__submit').click();
+        cy.wait(200);
+    }
+
+    function getClickElement() {
+        cy.visit(HOME_URL + '/clicker');
+        cy.wait(300);
+        cy.get('#clicker__text').should('be.visible');
+        return cy.get('#clicker__text').invoke('text');
+    }
+
+    it('click to increase count', () => {
+        cy.visit(HOME_URL);
+        getClickElement().should($clicks => {
+            expect($clicks).to.eql('0');
+        });
+
+        cy.get('#clicker__button').click();
+
+        getClickElement().should($clicks => {
+            expect($clicks).to.eql('1');
+        });
+
+        doLogout();
+        doLogin();
+
+        getClickElement().should($clicks => {
+            expect($clicks).to.eql('1');
+        });
+    });
 });

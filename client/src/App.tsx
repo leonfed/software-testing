@@ -54,7 +54,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="App">
+            <div className="App" id="app">
                 <NavigationHeader isLoggedIn={isLoggedIn}/>
                 {errorMessage && <ErrorMessage text={errorMessage}/>}
                 <Switch>

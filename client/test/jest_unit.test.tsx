@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {ClickResponseErrors, getClickResponseError} from "../src/components/Clicker";
 import {getLoginResponseError, LoginResponseErrors} from "../src/components/Login";
 import {checkLogin, checkPassword, getSignupResponseError, SignupResponseErrors} from "../src/components/Signup";

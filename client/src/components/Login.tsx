@@ -41,16 +41,16 @@ const Login = (props: any) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="InputForm">
+        <form onSubmit={handleSubmit} className="InputForm" id='login_form'>
             <div className="InputField">
                 <label htmlFor='login' className="InputLabel">Login</label>
-                <input type='login' id='login' value={login} onChange={(e) => setLogin(e.target.value)}/>
+                <input type='login' id='login_form__login' value={login} onChange={(e) => setLogin(e.target.value)}/>
             </div>
             <div className="InputField">
                 <label htmlFor='password' className="InputLabel">Password</label>
-                <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input type='password' id='login_form__password' value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <button type="submit" className="InputButton">Log In</button>
+            <button type="submit" className="InputButton" id='login_form__submit'>Log In</button>
         </form>
     );
 };

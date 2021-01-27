@@ -1,6 +1,11 @@
 import React, {FormEvent, useState} from 'react';
 import {UserInfo} from "../model/UserInfo";
 
+export const INCORRECT_LOGIN_ERROR =
+    "Login must be at least 3 symbols long and contain only letters, digits and \"_\"";
+export const INCORRECT_PASSWORD_ERROR =
+    "Password must be at least 5 symbols long and contain big letter, small letter and digit";
+
 export enum SignupResponseErrors {
     LoginUsed = "This login already exists. Please enter another login.",
     NotAcceptableInput = "Not acceptable input. Please retry.",
@@ -41,11 +46,11 @@ const Signup = (props: any) => {
         const userInfo: UserInfo = {login: login, password: password};
 
         if (!checkLogin(login)) {
-            props.errorFunction("Login must be at least 3 symbols long and contain only letters, digits and \"_\"");
+            props.errorFunction(INCORRECT_LOGIN_ERROR);
             return;
         }
         if (!checkPassword(password)) {
-            props.errorFunction("Password must be at least 5 symbols long and contain big letter, small letter and digit");
+            props.errorFunction(INCORRECT_PASSWORD_ERROR);
             return;
         }
 
@@ -62,20 +67,21 @@ const Signup = (props: any) => {
         }
     };
     return (
-        <form onSubmit={handleSubmit} className="InputForm">
+        <form onSubmit={handleSubmit} className="InputForm" id='signup_form'>
             <div className="InputField">
                 <label htmlFor='login' className="InputLabel">Login</label>
-                <input type='login' id='login' value={login} onChange={(e) => setLogin(e.target.value)}/>
+                <input type='login' id='signup_form__login' value={login} onChange={(e) => setLogin(e.target.value)}/>
             </div>
             <div className="InputField">
                 <label htmlFor='password' className="InputLabel">Password</label>
-                <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <input type='password' id='signup_form__password' value={password}
+                       onChange={(e) => setPassword(e.target.value)}/>
             </div>
             <div className="InputField">
                 <label htmlFor='email' className="InputLabel">Email</label>
-                <input type='email' id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <input type='email' id='signup_form__email' value={email} onChange={(e) => setEmail(e.target.value)}/>
             </div>
-            <button type="submit" className="InputButton">Sign Up</button>
+            <button type="submit" className="InputButton" id='signup_form__submit'>Sign Up</button>
         </form>
     );
 };

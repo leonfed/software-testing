@@ -10,7 +10,7 @@ const Logout = (props: any) => {
     return (
         <div>
             <p>{LOGOUT_MESSAGE}</p>
-            <button onClick={logout}>Log out</button>
+            <button onClick={logout} id='logout__submit'>Log out</button>
         </div>
     );
 };

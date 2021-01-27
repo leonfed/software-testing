@@ -3,7 +3,7 @@ import React from 'react';
 const ErrorMessage = (props: any) => {
     return (
         <div className="ErrorBox">
-           <div className="ErrorText">{props.text}</div>
+           <div className="ErrorText" id='error__message'>{props.text}</div>
         </div>
     );
 };

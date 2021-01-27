@@ -48,8 +48,8 @@ export const Clicker = (props: any) => {
 
     return (
         <div className="ClickerBox">
-            <div className="ClickerText">{props.currentClicks === undefined ? "unknown" : props.currentClicks}</div>
-            <button className="ClickerButton" onClick={click}>Click</button>
+            <div className="ClickerText" id='clicker__text'>{props.currentClicks === undefined ? "unknown" : props.currentClicks}</div>
+            <button className="ClickerButton" onClick={click} id='clicker__button'>Click</button>
         </div>
     );
 };

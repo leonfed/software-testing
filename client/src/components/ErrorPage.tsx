@@ -5,7 +5,7 @@ export const ERROR_PAGE_MESSAGE = 'Page Not Found';
 export const ErrorPage = () => {
     return (
         <div>
-            <p>{ERROR_PAGE_MESSAGE}</p>
+            <p id='not_found_page__message'>{ERROR_PAGE_MESSAGE}</p>
         </div>
     );
 };

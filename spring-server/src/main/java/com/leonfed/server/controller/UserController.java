@@ -14,8 +14,8 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController(UserService userDao) {
-        this.userService = userDao;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping(value = "/login", params = {"login", "password"})

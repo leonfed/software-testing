@@ -41,7 +41,7 @@ public class UserController {
         return response.toResponseEntity();
     }
 
-    @GetMapping(value = "/click", params = {"login", "password", "increment"})
+    @GetMapping(value = "/clicks", params = {"login", "password", "increment"})
     @ResponseBody
     public ResponseEntity<?> click(@RequestParam("login") String login,
                                    @RequestParam("password") String password,

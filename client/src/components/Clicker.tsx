@@ -21,6 +21,8 @@ export const Clicker = (props: any) => {
         searchParams.append("password", props.password);
         if (increment) {
             searchParams.append("increment", "true");
+        } else {
+            searchParams.append("increment", "false");
         }
 
         try {

@@ -1,6 +1,7 @@
 package com.leonfed.server.model;
 
 import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -31,8 +32,12 @@ public class Response {
     }
 
     public ResponseEntity<?> toResponseEntity() {
-        ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.status(status);
-        return json.map(JSONObject::toString).map(responseBuilder::body).orElseGet(responseBuilder::build);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Content-Type", "application/json");
+        return json
+                .map(jsonBody -> new ResponseEntity<>(jsonBody.toString(), headers, status))
+                .orElseGet(() -> new ResponseEntity<>(headers, status));
     }
 
     @Override

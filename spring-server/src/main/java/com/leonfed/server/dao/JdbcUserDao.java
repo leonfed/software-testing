@@ -68,4 +68,12 @@ public class JdbcUserDao extends JdbcDaoSupport implements UserDao {
         int result = jdbcTemplate.update(sql);
         return result != 0;
     }
+
+    @Override
+    public void clean() {
+        String sql = "DELETE FROM users WHERE 1 = 1";
+        jdbcTemplate.update(sql);
+    }
+
+
 }

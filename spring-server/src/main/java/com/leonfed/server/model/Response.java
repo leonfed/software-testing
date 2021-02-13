@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -40,5 +41,13 @@ public class Response {
                 "status = [" + status.toString() + "], " +
                 "json = [" + json.toString() + "]" +
                 ')';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Response response = (Response) o;
+        return status == response.status && Objects.equals(json.toString(), response.json.toString());
     }
 }

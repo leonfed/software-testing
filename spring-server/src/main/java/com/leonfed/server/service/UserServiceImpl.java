@@ -83,6 +83,6 @@ public class UserServiceImpl implements UserService {
             return new Response(HttpStatus.OK, jsonObject);
         });
 
-        return response.orElseGet(() -> new Response(HttpStatus.OK));
+        return response.orElseGet(() -> new Response(HttpStatus.UNAUTHORIZED));
     }
 }

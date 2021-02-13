@@ -10,7 +10,12 @@ public interface UserDao {
      */
     boolean adduser(String login, String password, String email);
 
+    /**
+     * @return value if credentials are correct, nothing otherwise
+     */
     Optional<Integer> getClicks(String login, String password);
 
     boolean incrementClicks(String login, String password);
+
+    void clean();
 }

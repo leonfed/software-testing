@@ -13,7 +13,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: Install dependencies
-      run: yarn --cwd client install 2>&1
+    - name: Install dependencies for client
+      working-directory: client
+      run: yarn install 2>&1
     - name: Test jest
-      run: yarn --cwd client jest -- --verbose=true /test/jest_unit.test /test/jest_component.test 2>&1
+      working-directory: client
+      run: yarn jest -- --verbose=true /test/jest_unit.test /test/jest_component.test 2>&1
+    - name: Install dependencies for server-api
+      working-directory: server-api
+      run: npm install 2>&1
+    - name: Start server-api
+      working-directory: server-api
+      run: npm start &
+    - name: Start client
+      working-directory: client
+      run: yarn start &
+    - name: Test e2e
+      working-directory: client
+      run: yarn jest -- /test/playwright_e2e.test 2>&1

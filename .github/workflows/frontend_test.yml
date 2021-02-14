@@ -14,6 +14,6 @@ jobs:
       with:
         node-version: '12.x'
     - name: Install dependencies
-      run: yarn --cwd client install
+      run: yarn --cwd client install 2>&1
     - name: Test jest
-      run: yarn --cwd client test-jest
+      run: yarn --cwd client jest -- --verbose=true /test/jest_unit.test /test/jest_component.test 2>&1
